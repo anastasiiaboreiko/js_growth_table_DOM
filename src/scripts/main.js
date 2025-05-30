@@ -34,19 +34,15 @@ removeRow.addEventListener('click', () => {
 });
 
 appendColumn.addEventListener('click', () => {
-  const cells = tbody.rows[0].cells;
-  const cellsLength = cells.length;
+  const firstRow = tbody.rows[0];
+  const columnCount = firstRow?.cells.length || 0;
+
+  if (columnCount >= 10) {
+    return;
+  }
 
   for (const row of tbody.rows) {
-    if (cellsLength >= 10) {
-      return;
-    }
-
-    if (cellsLength >= 2) {
-      const cloned = cells[1].cloneNode(true);
-
-      row.insertBefore(cloned, cells[cellsLength + 1]);
-    }
+    row.insertCell(-1);
   }
 
   updateButtons();
