@@ -34,17 +34,18 @@ removeRow.addEventListener('click', () => {
 });
 
 appendColumn.addEventListener('click', () => {
-  for (const row of tbody.rows) {
-    const cells = row.cells;
+  const cells = tbody.rows[0].cells;
+  const cellsLength = cells.length;
 
-    if (cells.length >= 10) {
+  for (const row of tbody.rows) {
+    if (cellsLength >= 10) {
       return;
     }
 
-    if (cells.length >= 2) {
+    if (cellsLength >= 2) {
       const cloned = cells[1].cloneNode(true);
 
-      row.insertBefore(cloned, cells[cells.length]);
+      row.insertBefore(cloned, cells[cellsLength + 1]);
     }
   }
 
@@ -52,10 +53,11 @@ appendColumn.addEventListener('click', () => {
 });
 
 removeColumn.addEventListener('click', () => {
-  for (const row of tbody.rows) {
-    const cells = row.cells;
+  const cells = tbody.rows[0].cells;
+  const cellsLength = cells.length;
 
-    if (cells.length <= 2) {
+  for (const row of tbody.rows) {
+    if (cellsLength <= 2) {
       return;
     }
 
